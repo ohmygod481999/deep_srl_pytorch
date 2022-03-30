@@ -1,0 +1,12 @@
+*.pyc
+*.swp
+*_model
+*_ensemble
+code_backup
+data
+data_backup
+models
+temp
+conll*/
+resource/
+venv
