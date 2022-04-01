@@ -70,7 +70,7 @@ class TaggerData(object):
     num_samples = len(self.dev_sents)
     batched_tensors = [self.dev_tensors[i: min(i+ batch_size, num_samples)]
                for i in range(0, num_samples, batch_size)]
-    return [zip(*t) for t in batched_tensors]
+    return [list(zip(*t)) for t in batched_tensors]
   
   def get_test_data(self, test_sentences, batch_size = None):
     max_len = max([len(s[0]) for s in test_sentences])

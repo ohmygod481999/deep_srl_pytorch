@@ -14,7 +14,6 @@ from neural_srl.theano.util import floatX
 
 
 import argparse
-from itertools import izip
 from nltk.tokenize import word_tokenize
 import numpy
 import os
@@ -103,7 +102,7 @@ if __name__ == "__main__":
       arguments.append(arg_spans)
     
     # Print human-readable results.
-    for (pred, args) in izip(predicates, arguments):
+    for (pred, args) in zip(predicates, arguments):
       print ("\nPredicate: {}".format(tokenized_sent[pred]))
       for arg in args:
         print ("\t{}: {}".format(arg[0], " ".join(tokenized_sent[arg[1]:arg[2]+1])))

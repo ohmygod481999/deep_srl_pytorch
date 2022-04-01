@@ -1,5 +1,5 @@
 from neural_srl.theano.optimizer import *
-from layer import *
+from neural_srl.theano.layer import *
 
 from collections import OrderedDict
 import itertools
@@ -101,7 +101,7 @@ class BiLSTMTaggerModel(object):
                   self.max_grad_norm)
     updates = adadelta(self.params, grads)
 
-    return theano.function([self.x0, self.mask0, self.y0], loss,
+    return theano.function([self.x0, self.mask0, self.y0], [loss, *self.inputs],
                  name='f_loss',
                  updates=updates,
                  on_unused_input='warn',

@@ -1,9 +1,8 @@
 import numpy
 import theano
 import theano.tensor as tensor
-from itertools import izip
 
-from util import floatX
+from neural_srl.theano.util import floatX
 
 
 def adadelta(parameters, gradients, rho=0.95, eps=1e-6):
@@ -14,17 +13,17 @@ def adadelta(parameters, gradients, rho=0.95, eps=1e-6):
   accum = [theano.shared(numpy.zeros(p.get_value().shape, floatX)) for p in parameters]
   accum_updates = [theano.shared(numpy.zeros(p.get_value().shape, floatX)) for p in parameters]
   
-  new_accum = [rho * g0 + (1.0 - rho) * (g**2) for g0, g in izip(accum, gradients)]
-  updates = [tensor.sqrt(d0 + eps) / tensor.sqrt(g0 + eps) * g for d0, g0, g in izip(accum_updates,
+  new_accum = [rho * g0 + (1.0 - rho) * (g**2) for g0, g in zip(accum, gradients)]
+  updates = [tensor.sqrt(d0 + eps) / tensor.sqrt(g0 + eps) * g for d0, g0, g in zip(accum_updates,
                                              new_accum,
                                              gradients)]
   
-  new_accum_updates = [rho * d0 + (1.0 - rho) * (d**2) for d0, d in izip(accum_updates,
+  new_accum_updates = [rho * d0 + (1.0 - rho) * (d**2) for d0, d in zip(accum_updates,
                                        updates)]
   
-  accum_ = zip(accum, new_accum)
-  accum_updates_ = zip(accum_updates, new_accum_updates)  
-  parameters_ = [ (p, (p - d)) for p,d in izip(parameters, updates)]
+  accum_ = list(zip(accum, new_accum))
+  accum_updates_ = list(zip(accum_updates, new_accum_updates) ) 
+  parameters_ = [ (p, (p - d)) for p,d in zip(parameters, updates)]
   return accum_ + accum_updates_ + parameters_ 
 
 

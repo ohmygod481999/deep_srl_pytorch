@@ -1,10 +1,10 @@
 {
 	"max_train_length": 100,
-	"batch_size"   : 80,
+	"batch_size"   : 128,
 	"features"     : [ "predicate" ],
 	"feature_sizes": [ 100 ],
   "use_se_marker": false,
-  "dev_batch_size": 500,
+  "dev_batch_size": 64,
 
   "word_embedding" : "glove100",
 	"lstm_hidden_size": 300,

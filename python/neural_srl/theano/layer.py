@@ -5,7 +5,7 @@ from theano.sandbox.rng_mrg import MRG_RandomStreams
 
 from ..shared.numpy_utils import *
 from ..shared.constants import RANDOM_SEED
-from util import *
+from neural_srl.theano.util import *
 
 def get_rnn_layer(layer_name):
   """ Predefined names for different LSTM variations.
@@ -399,7 +399,7 @@ class DropoutLayer(object):
         (instead of theano.tensor.shared.randomstreams.RandomStreams)
         See discussion: https://groups.google.com/forum/#!topic/theano-users/DbvTgTqkT8o
     """
-    self.rng = MRG_RandomStreams(seed=RANDOM_SEED, use_cuda=True)
+    self.rng = MRG_RandomStreams(seed=RANDOM_SEED)
     
   def generate_mask(self, mask_shape, is_train):
     if not self.fast_predict:
